@@ -1,0 +1,10 @@
+$palette: (
+    bg: #444,
+    primary: #a19a8c,
+    ternary: #a1908c,
+    secondary: #8c92a1,
+);
+
+@function _color($color) {
+  @return map-get($palette, $color);
+}
