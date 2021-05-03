@@ -8,14 +8,10 @@ function parseRawBooksJson (rawJson) {
 
   return items.map(bookItem => {
     const volumeInfo = bookItem.volumeInfo;
-    const saleInfo = bookItem.saleInfo;
 
     const {
       authors,
-      averageRating,
-      categories,
       description,
-      infoLink,
       pageCount,
       previewLink,
       publishedDate,
@@ -29,13 +25,12 @@ function parseRawBooksJson (rawJson) {
       authors,
       description,
       bookCover,
-      infoLink,
       pageCount,
       previewLink,
       publishedDate,
       publisher,
       subtitle,
-      title
+      title,
     };
   });
 }
@@ -54,11 +49,52 @@ async function fetchBooksFromAPI (query) {
 
 class Result extends React.Component {
   render () {
-    const { title } = this.props;
+    const {
+      authors,
+      description,
+      bookCover,
+      pageCount,
+      previewLink,
+      publishedDate,
+      publisher,
+      subtitle,
+      title
+    } = this.props;
+    let desc = '';
+    if (description) {
+      desc = description.substr(0, 250);
+    }
+    if (desc.length === 250) {
+      desc += '...';
+    }
     return (
       <div className="result">
         <div className="result_title">
           <h3>{title}</h3>
+        </div>
+        <div className="result_authors">
+          <h4>Author(s): {authors}</h4>
+        </div>
+        <div className="result_description">
+          <p>Description: {desc}</p>
+        </div>
+        <div className="result_bookcover">
+          <img src={bookCover} alt="book cover"/>
+        </div>
+        <div className="result_pagecount">
+          <p>Page Count: {pageCount}</p>
+        </div>
+        <div className="result_link">
+          <a href={previewLink}>Google Books Link</a>
+        </div>
+        <div className="result_published">
+          <p>Published: {publishedDate}</p>
+        </div>
+        <div className="result_publisher">
+          <p>Publisher: {publisher}</p>
+        </div>
+        <div className="result_subtitle">
+          <p>Subtitle: {subtitle}</p>
         </div>
       </div>
     );
@@ -71,6 +107,14 @@ class Results extends React.Component {
       return this.props.bookList.map((book, idx) => (
           <Result 
             key={idx}
+            authors={book.authors}
+            description={book.description}
+            bookCover={book.bookCover}
+            pageCount={book.pageCount}
+            previewLink={book.previewLink}
+            publishedDate={book.publishedDate}
+            publisher={book.publisher}
+            subtitle={book.subtitle}
             title={book.title}
           />
       ));

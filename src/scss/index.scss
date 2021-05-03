@@ -1,0 +1,36 @@
+@import "colors";
+
+body {
+  background: _color(bg);
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  header {
+    color: _color(secondary);
+
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+}
+
+.search-wrapper {
+  margin-bottom: 10px;
+}
+
+.results-wrapper {
+  width: 90%;
+}
+
+.result {
+  background: _color(primary);
+  border: 1px solid #777;
+  margin-bottom: 10px;
+}
