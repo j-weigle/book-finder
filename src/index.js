@@ -132,6 +132,11 @@ class Search extends React.Component {
       <div className="search-area">
         <input
           onChange={this.props.onChange}
+          onKeyPress={pressed => {
+            if (pressed.key === 'Enter') {
+              this.props.onClick();
+            }
+          }}
         />
         <button id="search-btn" onClick={this.props.onClick}>Search</button>
       </div>
