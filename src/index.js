@@ -85,7 +85,7 @@ class Result extends React.Component {
           <p>Page Count: {pageCount}</p>
         </div>
         <div className="result_link">
-          <a href={previewLink}>Google Books Link</a>
+          <a href={previewLink} rel="noreferrer noopener" target="_blank">Google Books Link</a>
         </div>
         <div className="result_published">
           <p>Published: {publishedDate}</p>
