@@ -64,13 +64,17 @@ class Book extends React.Component {
     let d = '';
     if (description) {
       d = description.substr(0, 250);
-    }
-    if (d.length === 250) {
-      d += '...';
+      if (d.length === 250) {
+        d += '...';
+      }
     }
     const desc = d;
 
-    const authorList = authors.join(', ');
+    let a = '';
+    if (authors) {
+      a = authors.join(', ');
+    }
+    const authorList = a;
 
     return ( // note that book cover images are approximately 200px wide
       <div className="book" >
