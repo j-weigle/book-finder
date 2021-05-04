@@ -21,14 +21,45 @@ body {
   margin-bottom: 10px;
 }
 
-.results-wrapper {
+.books-wrapper {
   width: 90%;
 }
 
-.result {
+.book {
   background: #a19a8c;
   border: 1px solid #777;
   margin-bottom: 10px;
 }
 
-/*# sourceMappingURL=index.css.map */
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.triple-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 3;
+}
+
+.book_title_subtitle {
+  margin: 10px;
+}
+
+.book_coverart {
+  margin: 10px;
+}
+
+.book_info {
+  margin: 10px;
+}

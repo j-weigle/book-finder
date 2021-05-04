@@ -47,7 +47,7 @@ async function fetchBooksFromAPI (query) {
   }
 }
 
-class Result extends React.Component {
+class Book extends React.Component {
   render () {
     const {
       authors,
@@ -60,52 +60,57 @@ class Result extends React.Component {
       subtitle,
       title
     } = this.props;
-    let desc = '';
+
+    let d = '';
     if (description) {
-      desc = description.substr(0, 250);
+      d = description.substr(0, 250);
     }
-    if (desc.length === 250) {
-      desc += '...';
+    if (d.length === 250) {
+      d += '...';
     }
-    return (
-      <div className="result">
-        <div className="result_title">
-          <h3>{title}</h3>
+    const desc = d;
+
+    const authorList = authors.join(', ');
+
+    return ( // note that book cover images are approximately 200px wide
+      <div className="book" >
+        <div className="row">
+          <div className="book_title_subtitle" >
+            <a href={previewLink} rel="noreferrer noopener" target="_blank">
+              <h3>{title}</h3>
+            </a>
+            <p>{subtitle}</p>
+          </div>
         </div>
-        <div className="result_authors">
-          <h4>Author(s): {authors}</h4>
-        </div>
-        <div className="result_description">
-          <p>Description: {desc}</p>
-        </div>
-        <div className="result_bookcover">
-          <img src={bookCover} alt="book cover"/>
-        </div>
-        <div className="result_pagecount">
-          <p>Page Count: {pageCount}</p>
-        </div>
-        <div className="result_link">
-          <a href={previewLink} rel="noreferrer noopener" target="_blank">Google Books Link</a>
-        </div>
-        <div className="result_published">
-          <p>Published: {publishedDate}</p>
-        </div>
-        <div className="result_publisher">
-          <p>Publisher: {publisher}</p>
-        </div>
-        <div className="result_subtitle">
-          <p>Subtitle: {subtitle}</p>
+        <div className="row">
+          <div className="column">
+            <div className="book_coverart">
+              <a href={previewLink} rel="noreferrer noopener" target="_blank">
+                <img src={bookCover} alt="book cover" />
+              </a>
+            </div>
+          </div>
+          <div className="triple-column">
+            <div className="book_info">
+              <p><strong>Author(s):</strong> {authorList}</p>
+              <p><strong>Page Count:</strong> {pageCount}</p>
+              <p><strong>Publisher:</strong> {publisher}</p>
+              <p><strong>Published:</strong> {publishedDate}</p>
+              <p><strong>Description:</strong> {desc}</p>
+              <a href={previewLink} rel="noreferrer noopener" target="_blank">Open Google Books</a>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-class Results extends React.Component {
+class Books extends React.Component {
   render () {
     if (this.props.bookList.length > 0) {
       return this.props.bookList.map((book, idx) => (
-          <Result 
+          <Book
             key={idx}
             authors={book.authors}
             description={book.description}
@@ -120,7 +125,7 @@ class Results extends React.Component {
       ));
     } else {
       return (
-        <div className="empty-results-area">No results to show...</div>
+        <div className="empty-books-area">No results to show...</div>
       );
     }
   }
@@ -149,7 +154,7 @@ class Base extends React.Component {
     super(props);
     this.state = {
       query: '',
-      results: []
+      books: []
     };
   }
 
@@ -163,8 +168,8 @@ class Base extends React.Component {
     const { query } = this.state;
     if (!query) return;
     fetchBooksFromAPI(query)
-      .then(results => {
-        this.setState({results});
+      .then(books => {
+        this.setState({books});
       });
   }
 
@@ -180,8 +185,8 @@ class Base extends React.Component {
             onClick={() => this.handleClick()}
           />
         </div>
-        <div className="results-wrapper">
-          <Results bookList={this.state.results} />
+        <div className="books-wrapper">
+          <Books bookList={this.state.books} />
         </div>
       </div>
     );
