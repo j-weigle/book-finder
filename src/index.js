@@ -87,22 +87,26 @@ class Book extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="column">
+          <div className="left-column">
             <div className="book_coverart">
               <a href={previewLink} rel="noreferrer noopener" target="_blank">
                 <img src={bookCover} alt="book cover" />
               </a>
             </div>
           </div>
-          <div className="triple-column">
+          <div className="right-column">
             <div className="book_info">
               <p><strong>Author(s):</strong> {authorList}</p>
               <p><strong>Page Count:</strong> {pageCount}</p>
               <p><strong>Publisher:</strong> {publisher}</p>
               <p><strong>Published:</strong> {publishedDate}</p>
-              <p><strong>Description:</strong> {desc}</p>
               <a href={previewLink} rel="noreferrer noopener" target="_blank">Open Google Books</a>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="book_desc">
+            <p><strong>Description:</strong> {desc}</p>
           </div>
         </div>
       </div>

@@ -23,12 +23,21 @@ body {
 
 .books-wrapper {
   width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .book {
   background: #a19a8c;
   border: 1px solid #777;
   margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.book img {
+  max-width: 128px;
 }
 
 .row {
@@ -38,18 +47,19 @@ body {
   width: 100%;
 }
 
-.column {
+.left-column {
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
 }
 
-.triple-column {
+.right-column {
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
-  flex: 3;
+  flex: 10;
+  min-width: 200px;
 }
 
 .book_title_subtitle {
@@ -62,4 +72,14 @@ body {
 
 .book_info {
   margin: 10px;
+}
+
+.book_desc {
+  margin: 10px;
+}
+
+@media screen and (min-width: 860px) {
+  .book {
+    width: 49%;
+  }
 }
