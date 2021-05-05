@@ -100,13 +100,13 @@ class Book extends React.Component {
               <p><strong>Page Count:</strong> {pageCount}</p>
               <p><strong>Publisher:</strong> {publisher}</p>
               <p><strong>Published:</strong> {publishedDate}</p>
-              <a href={previewLink} rel="noreferrer noopener" target="_blank">Open Google Books</a>
+              <a href={previewLink} rel="noreferrer noopener" target="_blank">Open Google Books [<span>&#8599;</span></a>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="book_desc">
-            <p><strong>Description:</strong> {desc}</p>
+            <p>{desc}</p>
           </div>
         </div>
       </div>
