@@ -34,7 +34,7 @@ body {
 
 .book {
   background: _color(primary);
-  border: 1px solid #777;
+  border: 2px solid _color(bg-dark);
   margin-bottom: 10px;
   width: 100%;
   display: flex;
@@ -42,6 +42,13 @@ body {
 
   img {
     max-width: 128px;
+  }
+
+  a {
+    text-decoration: none;
+    &:link, &:visited {
+      color: _color(secondary-dark);
+    }
   }
 }
 
@@ -76,10 +83,14 @@ body {
 
 .book_info {
   margin: 10px;
+  span {
+    text-decoration: underline;
+  }
 }
 
 .book_desc {
   margin: 10px;
+  text-indent: 25px;
 }
 
 @media screen and (min-width: 860px) {

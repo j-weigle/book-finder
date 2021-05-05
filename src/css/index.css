@@ -1,5 +1,5 @@
 body {
-  background: #444;
+  background: #777;
   margin: 0;
   padding: 0;
 }
@@ -11,7 +11,7 @@ body {
   width: 100%;
 }
 .wrapper header {
-  color: #8c92a1;
+  color: #d7ebff;
 }
 .wrapper header h1 {
   font-family: Arial, Helvetica, sans-serif;
@@ -29,8 +29,8 @@ body {
 }
 
 .book {
-  background: #a19a8c;
-  border: 1px solid #777;
+  background: #fffad7;
+  border: 2px solid #373737;
   margin-bottom: 10px;
   width: 100%;
   display: flex;
@@ -38,6 +38,12 @@ body {
 }
 .book img {
   max-width: 128px;
+}
+.book a {
+  text-decoration: none;
+}
+.book a:link, .book a:visited {
+  color: #006cd7;
 }
 
 .row {
@@ -73,9 +79,13 @@ body {
 .book_info {
   margin: 10px;
 }
+.book_info span {
+  text-decoration: underline;
+}
 
 .book_desc {
   margin: 10px;
+  text-indent: 25px;
 }
 
 @media screen and (min-width: 860px) {
