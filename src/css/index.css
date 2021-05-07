@@ -18,7 +18,35 @@ body {
 }
 
 .search-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   margin-bottom: 10px;
+}
+
+.search {
+  border: 1px solid #d7bc00;
+}
+.search input {
+  font-size: medium;
+  padding-left: 10px;
+  box-sizing: border-box;
+  height: 35px;
+  width: 400px;
+  background-color: lightgray;
+  border: 1px solid #ffd7e1;
+}
+.search input:focus {
+  outline: none;
+  background-color: white;
+}
+.search button {
+  box-sizing: border-box;
+  width: 100px;
+  height: 35px;
+  color: white;
+  background-color: #d70036;
+  border: 1px solid #ffd7e1;
 }
 
 .books-wrapper {
@@ -91,5 +119,16 @@ body {
 @media screen and (min-width: 860px) {
   .book {
     width: 49%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .search {
+    width: 90%;
+  }
+  .search input {
+    width: 100%;
+  }
+  .search button {
+    width: 100%;
   }
 }
