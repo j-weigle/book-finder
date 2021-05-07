@@ -142,8 +142,11 @@ class Books extends React.Component {
 class Search extends React.Component {
   render () {
     return(
-      <div className="search-area">
+      <div className="search">
         <input
+          type="text"
+          value={this.props.query}
+          placeholder="Search by author, name, etc..."
           onChange={this.props.onChange}
           onKeyPress={pressed => {
             if (pressed.key === 'Enter') {
@@ -151,7 +154,7 @@ class Search extends React.Component {
             }
           }}
         />
-        <button id="search-btn" onClick={this.props.onClick}>Search</button>
+        <button id="search-btn" onClick={this.props.onClick}>SEARCH</button>
       </div>
     );
   }
