@@ -30,6 +30,14 @@ class Base extends React.Component {
       });
   }
 
+  handleClear () {
+    this.setState({
+      query: ''
+    });
+    const searchInput = document.querySelector('#search-input');
+    searchInput.focus();
+  }
+
   render () {
     return (
       <div className="wrapper">
@@ -40,6 +48,8 @@ class Base extends React.Component {
           <Search 
             onChange={(userIn) => this.handleChange(userIn)}
             onClick={() => this.handleClick()}
+            query={this.state.query}
+            onClear={() => this.handleClear()}
           />
         </div>
         <div className="books-wrapper">

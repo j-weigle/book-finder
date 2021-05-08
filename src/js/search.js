@@ -4,7 +4,17 @@ export class Search extends React.Component {
   render () {
     return(
       <div className="search">
+        <button 
+          id="clear-btn"
+          aria-label="clear and focus search input"
+          style={{
+            'display': (this.props.query.length > 0 ? 'inline-block' : 'none')
+          }}
+          onClick={this.props.onClear}
+        > X
+        </button>
         <input
+          id="search-input"
           type="text"
           value={this.props.query}
           placeholder="Search by author, name, etc..."
@@ -14,8 +24,13 @@ export class Search extends React.Component {
               this.props.onClick();
             }
           }}
-        />
-        <button id="search-btn" onClick={this.props.onClick}>SEARCH</button>
+        ></input>
+        <button
+          id="search-btn"
+          aria-label="search button"
+          onClick={this.props.onClick}
+        > SEARCH
+        </button>
       </div>
     );
   }

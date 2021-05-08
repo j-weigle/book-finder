@@ -30,12 +30,30 @@ body {
 
 .search {
   border: 1px solid _color(primary-dark);
+  position: relative;
+
+  #clear-btn {
+    font-size: 20px;
+    color: _color(bg-dark);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    margin: 10px 0 0 10px; 
+    padding: 0;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
   input {
     font-size: medium;
-    padding-left: 10px;
+    padding-left: 40px;
     box-sizing: border-box;
-    height: 35px;
+    height: 40px;
     width: 400px;
     background-color: lightgray;
     border: 1px solid _color(tertiary);
@@ -46,13 +64,18 @@ body {
     }
   }
 
-  button {
+  #search-btn {
+    font-size: medium;
     box-sizing: border-box;
     width: 100px;
-    height: 35px;
+    height: 40px;
     color: white;
     background-color: _color(tertiary-dark);
     border: 1px solid _color(tertiary);
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -137,7 +160,7 @@ body {
       width: 100%;
     }
 
-    button {
+    #search-btn {
       width: 100%;
     }
   }
