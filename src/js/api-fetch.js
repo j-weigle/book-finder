@@ -31,13 +31,19 @@ function parseRawBooksJson (rawJson) {
   });
 }
 
-export async function fetchBooksFromAPI (query) {
-  const apiURL = 'https://www.googleapis.com/books/v1/volumes?q=' + query;
+export async function fetchBooksFromAPI (query, startIndex, maxResults) {
+  const apiURL = 'https://www.googleapis.com/books/v1/volumes' +
+    '?q=' + query +
+    '&startIndex=' + startIndex.toString() +
+    '&maxResults=' + maxResults.toString();
   try {
     const res = await fetch(apiURL);
     const rawJson = await res.json();
-    const bookList = parseRawBooksJson(rawJson);
-    return bookList;
+    console.log(res);
+    console.log(rawJson);
+    const books = parseRawBooksJson(rawJson);
+    const { totalItems } = rawJson;
+    return { books, totalItems };
   } catch (e) {
     console.error(e);
   }
