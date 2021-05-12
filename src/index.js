@@ -41,13 +41,13 @@ class Base extends React.Component {
   }
 
   handlePageChange (newPage) {
-    console.log('fired handlePageChange with new page: ' + newPage);
     window.scrollTo({top: 0, behavior: 'smooth'});
     const { currentSearchQuery, currentPage } = this.state;
-    if (!currentSearchQuery) return;
-    if (newPage === currentPage) return;
-    if ((newPage-1) * this.booksPerPage > this.state.totalBooks) return;
-    fetchBooksFromAPI(currentSearchQuery, (newPage-1) * this.booksPerPage, this.booksPerPage)
+    if (!currentSearchQuery || newPage === currentPage) return;
+    const newStartIdx = (newPage - 1) * this.booksPerPage;
+    if (newStartIdx > this.state.totalBooks) return;
+
+    fetchBooksFromAPI(currentSearchQuery, newStartIdx, this.booksPerPage)
     .then(res => {
       this.setState({
         currentPage: newPage,
