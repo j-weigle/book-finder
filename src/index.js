@@ -14,8 +14,7 @@ class Base extends React.Component {
       query: '',
       currentSearchQuery: '',
       books: [],
-      totalBooks: 0,
-      currentPage: 1,
+      currentPage: 0,
     };
     this.booksPerPage = 10;
   }
@@ -35,7 +34,6 @@ class Base extends React.Component {
         currentSearchQuery: query,
         currentPage: 1,
         books: res.books,
-        totalBooks: res.totalItems
       });
     });
   }
@@ -45,7 +43,6 @@ class Base extends React.Component {
     const { currentSearchQuery, currentPage } = this.state;
     if (!currentSearchQuery || newPage === currentPage) return;
     const newStartIdx = (newPage - 1) * this.booksPerPage;
-    if (newStartIdx > this.state.totalBooks) return;
 
     fetchBooksFromAPI(currentSearchQuery, newStartIdx, this.booksPerPage)
     .then(res => {
@@ -84,9 +81,10 @@ class Base extends React.Component {
         <div className="pages-wrapper">
           <Pagination
             onPageChange={(n) => this.handlePageChange(n)}
-            totalRecords={this.state.totalBooks}
             currentPage={this.state.currentPage}
             pageSize={this.booksPerPage}
+            prevPages={2}
+            show={this.state.currentPage > 0}
           />
         </div>
       </div>
