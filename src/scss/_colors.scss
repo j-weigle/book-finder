@@ -1,12 +1,17 @@
+$bg: #777;
+$primary: #fffad7;
+$secondary: #d7ebff;
+$tertiary: #ffd7e1;
+
 $palette: (
-    bg: #777,
-    bg-dark: darken(#777, 25%),
-    primary: #fffad7,
-    secondary: #d7ebff,
-    tertiary: #ffd7e1,
-    primary-dark: darken(#fffad7, 50%),
-    secondary-dark: darken(#d7ebff, 50%),
-    tertiary-dark: darken(#ffd7e1, 50%),
+    bg: $bg,
+    bg-dark: darken($bg, 25%),
+    primary: $primary,
+    secondary: $secondary,
+    tertiary: $tertiary,
+    primary-dark: darken($primary, 50%),
+    secondary-dark: darken($secondary, 50%),
+    tertiary-dark: darken($tertiary, 50%),
 );
 
 @function _color($color) {
