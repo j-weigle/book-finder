@@ -147,6 +147,45 @@ body {
   text-indent: 25px;
 }
 
+.pages-wrapper {
+  margin-bottom: 10px;
+}
+
+ul.pagination {
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+
+  li { display: inline; }
+
+  li.page-item.active {
+    button.page-link {
+      margin-left: 1px;
+      margin-right: 1px;
+      color: _color(bg-dark);
+      background-color: _color(secondary);
+      border-color: transparent;
+    }
+  }
+
+  button.page-link {
+    margin-left: 1px;
+    margin-right: 1px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: none;
+    color: _color(bg-dark);
+    background-color: lighten(_color(secondary), 10%);
+    border-color: transparent;
+
+    &:hover {
+      background-color: darken(_color(secondary), 10%);
+    }
+  }
+}
+
 @media screen and (min-width: 860px) {
   .book {
     width: 49%;

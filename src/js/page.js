@@ -16,8 +16,7 @@ export class Page extends React.Component {
             if (page === LEFT_PAGE) return (
               <li key={idx} className="page-item">
                 <button className="page-link" aria-label="Previous" onClick={() => {onPageChange(currentPage - 1)}}>
-                  <span aria-hidden="true">&laquo;</span>
-                  <span className="sr-only">Previous</span>
+                  <span>&laquo;</span>
                 </button>
               </li>
             );
@@ -25,15 +24,20 @@ export class Page extends React.Component {
             if (page === RIGHT_PAGE) return (
               <li key={idx} className="page-item">
                 <button className="page-link" aria-label="Next" onClick={() => {onPageChange(currentPage + 1)}}>
-                  <span aria-hidden="true">&raquo;</span>
-                  <span className="sr-only">Next</span>
+                  <span>&raquo;</span>
                 </button>
               </li>
             );
 
             return (
               <li key={idx} className={`page-item${ currentPage === page ? ' active' : ''}`}>
-                <button className="page-link" onClick={() => {onPageChange(page)}}>{ page }</button>
+                <button
+                  className="page-link"
+                  aria-label={`${currentPage === page ? 'current page' : 'go to page ' + page}`}
+                  onClick={() => {onPageChange(page)}}
+                >
+                  { page }
+                </button>
               </li>
             );
 
