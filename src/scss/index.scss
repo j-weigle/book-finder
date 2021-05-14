@@ -19,13 +19,26 @@ body {
       font-family: Arial, Helvetica, sans-serif;
     }
   }
+
+  footer {
+    margin: 20px;
+    color: _color(secondary);
+
+    a {
+      text-decoration: none;
+      &:link, &:visited {
+        color: _color(secondary);
+        filter: saturate(5);
+      }
+    }
+  }
 }
 
 .search-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .search {
@@ -84,6 +97,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.empty-books-area {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .book {
@@ -147,12 +166,8 @@ body {
   text-indent: 25px;
 }
 
-.pages-wrapper {
-  margin-bottom: 10px;
-}
-
 ul.pagination {
-  margin: 0;
+  margin: 20px;
   padding: 0;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   list-style-type: none;
@@ -182,6 +197,7 @@ ul.pagination {
 
     &:hover {
       background-color: darken(_color(secondary), 10%);
+      cursor: pointer;
     }
   }
 }
