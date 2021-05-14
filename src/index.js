@@ -87,6 +87,9 @@ class Base extends React.Component {
             show={this.state.currentPage > 0}
           />
         </div>
+        <footer>
+          By <a href="https://j-weigle.github.io" rel="noreferrer noopener" target="_blank">Justin Weigle</a>
+        </footer>
       </div>
     );
   }
