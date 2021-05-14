@@ -16,6 +16,7 @@ export class Search extends React.Component {
         <input
           id="search-input"
           type="text"
+          autoComplete="off"
           value={this.props.query}
           placeholder="Search by author, name, etc..."
           onChange={this.props.onChange}
