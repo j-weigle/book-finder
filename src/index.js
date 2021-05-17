@@ -15,6 +15,7 @@ class Base extends React.Component {
       currentSearchQuery: '',
       books: [],
       currentPage: 0,
+      loading: false,
     };
     this.booksPerPage = 10;
   }
@@ -28,27 +29,34 @@ class Base extends React.Component {
   handleSearch () {
     const { query } = this.state;
     if (!query) return;
+    this.setState({loading: true});
     fetchBooksFromAPI(query, 0, this.booksPerPage)
     .then(res => {
       this.setState({
         currentSearchQuery: query,
         currentPage: 1,
         books: res.books,
+        loading: false,
       });
     });
   }
 
   handlePageChange (newPage) {
-    window.scrollTo({top: 0, behavior: 'smooth'});
     const { currentSearchQuery, currentPage } = this.state;
-    if (!currentSearchQuery || newPage === currentPage) return;
+    if (!currentSearchQuery) return;
+    if (newPage === currentPage) {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      return;
+    }
     const newStartIdx = (newPage - 1) * this.booksPerPage;
 
+    this.setState({loading: true});
     fetchBooksFromAPI(currentSearchQuery, newStartIdx, this.booksPerPage)
     .then(res => {
       this.setState({
         currentPage: newPage,
-        books: res.books
+        books: res.books,
+        loading: false,
       });
     });
   }
@@ -76,7 +84,10 @@ class Base extends React.Component {
           />
         </div>
         <div className="books-wrapper">
-          <Books bookList={this.state.books} />
+          <Books 
+            bookList={this.state.books}
+            loading={this.state.loading}
+          />
         </div>
         <div className="pages-wrapper">
           <Pagination

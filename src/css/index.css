@@ -87,10 +87,27 @@ body {
   justify-content: space-between;
 }
 
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.loading-wrapper .loading-gif {
+  display: flex;
+  width: 15%;
+  max-width: 50px;
+}
+.loading-wrapper p {
+  color: #fffad7;
+}
+
 .empty-books-area {
   display: flex;
   justify-content: center;
   width: 100%;
+  color: #fffad7;
 }
 
 .book {
