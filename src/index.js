@@ -65,7 +65,7 @@ class Base extends React.Component {
     return (
       <div className="wrapper">
         <header>
-          <h1>Book Finder</h1>
+          <h1>Find A Book</h1>
         </header>
         <div className="search-wrapper">
           <Search 
