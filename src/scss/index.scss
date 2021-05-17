@@ -99,10 +99,28 @@ body {
   justify-content: space-between;
 }
 
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .loading-gif {
+    display: flex;
+    width: 15%;
+    max-width: 50px;
+  }
+  p {
+    color: _color(primary);
+  }
+}
+
 .empty-books-area {
   display: flex;
   justify-content: center;
   width: 100%;
+  color: _color(primary);
 }
 
 .book {
