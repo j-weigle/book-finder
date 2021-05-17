@@ -2,106 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
 
-function parseRawBooksJson (rawJson) {
-  const { items } = rawJson;
-  if (!items) return [];
-
-  return items.map(bookItem => {
-    const volumeInfo = bookItem.volumeInfo;
-    const saleInfo = bookItem.saleInfo;
-
-    const {
-      authors,
-      averageRating,
-      categories,
-      description,
-      infoLink,
-      pageCount,
-      previewLink,
-      publishedDate,
-      publisher,
-      subtitle,
-      title
-    } = volumeInfo;
-    const bookCover = volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : 'https://www.lse.ac.uk/International-History/Images/Books/NoBookCover.png';
-
-    return {
-      authors,
-      description,
-      bookCover,
-      infoLink,
-      pageCount,
-      previewLink,
-      publishedDate,
-      publisher,
-      subtitle,
-      title
-    };
-  });
-}
-
-async function fetchBooksFromAPI (query) {
-  const apiURL = 'https://www.googleapis.com/books/v1/volumes?q=' + query;
-  try {
-    const res = await fetch(apiURL);
-    const rawJson = await res.json();
-    const bookList = await parseRawBooksJson(rawJson);
-    return bookList;
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-class Result extends React.Component {
-  render () {
-    const { title } = this.props;
-    return (
-      <div className="result">
-        <div className="result_title">
-          <h3>{title}</h3>
-        </div>
-      </div>
-    );
-  }
-}
-
-class Results extends React.Component {
-  render () {
-    if (this.props.bookList.length > 0) {
-      return this.props.bookList.map((book, idx) => (
-          <Result 
-            key={idx}
-            title={book.title}
-          />
-      ));
-    } else {
-      return (
-        <div className="empty-results-area">No results to show...</div>
-      );
-    }
-  }
-}
-
-class Search extends React.Component {
-  render () {
-    return(
-      <div className="search-area">
-        <input
-          onChange={this.props.onChange}
-        />
-        <button id="search-btn" onClick={this.props.onClick}>Search</button>
-      </div>
-    );
-  }
-}
+import { fetchBooksFromAPI } from './js/api-fetch';
+import { Search } from './js/search';
+import { Books } from './js/books';
+import { Pagination } from './js/pagination';
 
 class Base extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       query: '',
-      results: []
+      currentSearchQuery: '',
+      books: [],
+      currentPage: 0,
+      loading: false,
     };
+    this.booksPerPage = 10;
   }
 
   handleChange (userIn) {
@@ -110,30 +26,81 @@ class Base extends React.Component {
     });
   }
 
-  handleClick () {
+  handleSearch () {
     const { query } = this.state;
     if (!query) return;
-    fetchBooksFromAPI(query)
-      .then(results => {
-        this.setState({results});
+    this.setState({loading: true});
+    fetchBooksFromAPI(query, 0, this.booksPerPage)
+    .then(res => {
+      this.setState({
+        currentSearchQuery: query,
+        currentPage: 1,
+        books: res.books,
+        loading: false,
       });
+    });
+  }
+
+  handlePageChange (newPage) {
+    const { currentSearchQuery, currentPage } = this.state;
+    if (!currentSearchQuery) return;
+    if (newPage === currentPage) {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      return;
+    }
+    const newStartIdx = (newPage - 1) * this.booksPerPage;
+
+    this.setState({loading: true});
+    fetchBooksFromAPI(currentSearchQuery, newStartIdx, this.booksPerPage)
+    .then(res => {
+      this.setState({
+        currentPage: newPage,
+        books: res.books,
+        loading: false,
+      });
+    });
+  }
+
+  handleClear () {
+    this.setState({
+      query: ''
+    });
+    const searchInput = document.querySelector('#search-input');
+    searchInput.focus();
   }
 
   render () {
     return (
       <div className="wrapper">
         <header>
-          <h1>Book Finder</h1>
+          <h1>Find A Book</h1>
         </header>
         <div className="search-wrapper">
           <Search 
             onChange={(userIn) => this.handleChange(userIn)}
-            onClick={() => this.handleClick()}
+            onClick={() => this.handleSearch()}
+            query={this.state.query}
+            onClear={() => this.handleClear()}
           />
         </div>
-        <div className="results-wrapper">
-          <Results bookList={this.state.results} />
+        <div className="books-wrapper">
+          <Books 
+            bookList={this.state.books}
+            loading={this.state.loading}
+          />
         </div>
+        <div className="pages-wrapper">
+          <Pagination
+            onPageChange={(n) => this.handlePageChange(n)}
+            currentPage={this.state.currentPage}
+            pageSize={this.booksPerPage}
+            prevPages={2}
+            show={this.state.currentPage > 0}
+          />
+        </div>
+        <footer>
+          By <a href="https://j-weigle.github.io" rel="noreferrer noopener" target="_blank">Justin Weigle</a>
+        </footer>
       </div>
     );
   }

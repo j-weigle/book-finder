@@ -1,6 +1,6 @@
 {
-  "name": "book-finder",
-  "version": "0.1.0",
+  "name": "find-a-book",
+  "version": "1.0.0",
   "private": true,
   "homepage": ".",
   "dependencies": {
