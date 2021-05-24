@@ -73,7 +73,7 @@ class Base extends React.Component {
     return (
       <div className="wrapper">
         <header>
-          <h1>Find A Book</h1>
+          <a href="https://j-weigle.github.io/projects/find-a-book"><h1>Find A Book</h1></a>
         </header>
         <div className="search-wrapper">
           <Search 
@@ -99,7 +99,7 @@ class Base extends React.Component {
           />
         </div>
         <footer>
-          By <a href="https://j-weigle.github.io" rel="noreferrer noopener" target="_blank">Justin Weigle</a>
+          By <a href="https://j-weigle.github.io">Justin Weigle</a>
         </footer>
       </div>
     );
